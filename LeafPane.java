@@ -134,6 +134,24 @@ public class LeafPane extends StackPane {
         translateTransition.play();
     }
 
+    public void yMoveUp(double rootDepth){
+
+        // Cambiar el tamano
+//        makeSmaller(profundidad);
+
+        // Crea animacion y configurala.
+        TranslateTransition translateTransition = new TranslateTransition();
+        translateTransition.setNode(this); // Que nodo es
+        translateTransition.setDuration(Duration.millis(ANIM_DURATION)); // La duracion
+        translateTransition.setCycleCount(1); // Cuantas veces lo hace.
+        translateTransition.setByY(-1 / (rootDepth * (rootDepth + 1)));
+//        translateTransition.setByY(-this.getHeight()/(profundidad*(profundidad-1))); // Lo que se mueve en el eje Y.
+
+        // Corre la animacion
+        translateTransition.play();
+    }
+
+
     //
     public void makeSmaller(int profundidad) {
 

@@ -75,7 +75,6 @@ public class TreePane extends Pane {
 		if (root == null) {
 			// TODO: Cade vez que se agregue una nueva hoja al arbol. se debe mover todos los nodos en el arbol hacia arriba de acuerdo a su profundidad
 			// Llamar a moveYup aqui. para todos los nodos en el arbol.
-
 			root = new LeafPane(this, number, xOffset, yOffset);
 
 		} else {
@@ -105,7 +104,7 @@ public class TreePane extends Pane {
 
 		int depth = max(calcDepthOf(root.getLeft()), calcDepthOf(root.getRight())) + 1;
 		root.setDepth((depth));
-
+//        posPath(); // FIXME: Este para subir los nodos.
 		return root;
 	}
 
@@ -143,32 +142,18 @@ public class TreePane extends Pane {
 		return simpleRightRotation(root);
 	}
 
-	public String toStringPre() {
-		return toStringPreRec(this.root);
-	}
-
-	private String toStringPreRec(LeafPane node) {
-		String result = "";
-		if (node != null) {
-//			result = node.getElement().toString() + ", " ;
-			// TODO: Aqui se llamma moveYUp para mover a todos los nodos.
-			toStringPreRec(node.getLeft());
-			toStringPreRec(node.getRight());
-		}
-		return result;
-	}
-
-    public String posPath() {
-	    return toStringPreRec(this.root);
+    public void posPath() {
+	    posPathRec(this.root);
     }
 
-    private String posPathRec(LeafPane leaf) {
+    private void posPathRec(LeafPane leaf) {
         if (leaf != null) {
-            toStringPreRec(node.getLeft()) +
-                    toStringPreRec(node.getRight()) +
-                    ", " + node.getElement().toString();
+            posPathRec(leaf.getLeft());
+            posPathRec(leaf.getRight());
+            // Aqui se suben
+            leaf.yMoveUp(this.root.getDepth());
+
         }
-        return result;
     }
 
 	// Retira un leafPane
