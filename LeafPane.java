@@ -65,8 +65,11 @@ public class LeafPane extends StackPane {
         // Trasladar el panel completo a la mitad.
         double xCenterOfTreePane = (treePane.getWidth()/2)-this.getWidth()/2;
         double yCenterOfTreePane = (treePane.getHeight()/2)-this.getHeight()/2;
-        this.setTranslateX(xCenterOfTreePane + (10 * xOff)); // TODO aqui se les da nuevas posiciones a las hojas que apens crecen.
-        this.setTranslateY(yCenterOfTreePane + (10 * yOff));
+        double widthTreePane = treePane.getWidth();
+        double heightTreePane = treePane.getHeight();
+        this.setTranslateX((widthTreePane * xOff) - this.getWidth() / 2); // TODO aqui se les da nuevas posiciones a las hojas que apens crecen.
+        this.setTranslateY((heightTreePane - heightTreePane * (1 / (2 * yOff))) - this.getHeight() / 2);
+
     }
 
     // endregion
@@ -79,8 +82,8 @@ public class LeafPane extends StackPane {
 
         this.setStyle(COLOR_BACKGROUND);
         this.setStyle(COLOR_BACKGROUND);
-        this.setWidth(treePane.getHeight());
-        this.setHeight(treePane.getHeight());
+        this.setWidth(treePane.getHeight()/10);
+        this.setHeight(treePane.getHeight()/10);
 
         // Randomizar el color del circulo de background
         circle.setFill(Color.rgb((int) Math.floor(Math.random()*200), (int) Math.floor(Math.random()*200), (int) Math.floor(Math.random()*200)));
